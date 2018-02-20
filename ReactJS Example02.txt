@@ -1,0 +1,73 @@
+//Function Component --> No Interacion so no State to handle
+	//Lvl 1 Component (Child)
+	const Card = (props) => {
+	 return (
+	 	<div style={{margin: '1em'}}>
+	  	<img width="75" src={props.avatar_url}/>
+	    <div style={{display: 'inline-block', marginLeft: 10}}>
+	    	<div style={{fontSize: '1.25em', fontWeight: 'bold'}}>{props.name}</div>
+	      <div>{props.company}</div>
+	    </div>
+	  </div>
+	 );
+	};
+
+	//Function Component --> No Interacion so no State to handle
+	//Lvl 2 Component (Siblings)
+	const CardList = (props) => {
+		return (
+	  	<div>
+	    	{props.cards.map(card => <Card key={card.id} {...card}/>)}
+	    </div>
+	  );
+	}
+
+	//Class Component --> Interacts with user and has state
+	//Lvl 2 Component (Siblings)
+	class Form extends React.Component {
+		state = { userName: '' }
+	  	handleSubmit = (event) => { //Submit events receive the event that needs to be prevented for no page reload
+		  	event.preventDefault();
+		    axios.get('https://api.github.com/users/${this.state.userName}') //AXIOS library for GET, POST, PUT
+		    	.then((resp) => {
+			      	this.props.onSubmit(resp.data);
+			        this.setState({ userName: ''});
+		        })
+	  }
+
+		render(){
+		  	return(
+		    	<form onSubmit={this.handleSubmit}>
+		      	<input type="text"
+		        	value={this.state.userName}
+		          onChange={(event) => this.setState({ userName: event.target.value })}
+		          placeholder="Github username" required />
+		        <button type="submit">Add card</button>
+		      </form>
+		    );
+	  }
+	}
+
+	//Class Component --> Interacts with the user and has a state
+	//Contains both Form and CardList Components
+	//Lvl 3 Component (Father Component)
+	class App extends React.Component{
+		state = { cards: [] };
+	      
+	      addNewCard = (cardInfo) => {
+	      	this.setState(prevState => ({
+	        	cards: prevState.cards.concat(cardInfo)
+	        }));
+	      }
+	      
+		render(){
+	  	return(
+	    	<div>
+	      	<Form onSubmit={this.addNewCard}/>
+	        <CardList cards={this.state.cards}/>
+	      </div>
+	    );
+	  }
+	}
+
+	ReactDOM.render(<App />, mountNode);
