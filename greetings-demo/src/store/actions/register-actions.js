@@ -2,7 +2,7 @@ export const Actions = {
   REGISTRATION_SAVE: 'REGISTRATION_SAVE',
   REGISTRATION_SAVE_SUCCESS: 'REGISTRATION_SAVE_SUCCESS',
   REGISTRATION_SAVE_ERROR: 'REGISTRATION_SAVE_ERROR',
-  FETCH_COUNTRIES: 'FETCH_COUNTRIES',
+  GET_COUNTRIES: 'GET_COUNTRIES',
 };
 
 function registerVisitorAction(visitor) {
@@ -12,7 +12,7 @@ function registerVisitorAction(visitor) {
   };
 }
 
-export function registerVisitorSuccess(visitor) {
+function registerVisitorSuccess(visitor) {
   return {
     type: Actions.REGISTRATION_SAVE_SUCCESS,
     payload: visitor
@@ -26,12 +26,12 @@ function registerVisitorError(error) {
   };
 }
 
-export function fetchCountries() {
+export function getCountries() {
   return (dispatch) => {
     return dispatch({
-      type: Actions.FETCH_COUNTRIES,
+      type: Actions.GET_COUNTRIES,
       promise: fetch("https://restcountries.eu/rest/v2/all")
-    })    
+    })
   }
 }
 
@@ -44,7 +44,6 @@ export function registerVisitor(visitor) {
     dispatch(registerVisitorAction(visitor));
     return api.submitVisitor(visitor).then(response => {
       dispatch(registerVisitorSuccess(response));
-    })
-      .catch(err => registerVisitorError(err));
+    }).catch(err => registerVisitorError(err));
   };
 }
