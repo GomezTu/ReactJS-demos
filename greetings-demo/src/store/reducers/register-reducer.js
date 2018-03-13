@@ -11,7 +11,7 @@ export const registrationReducer = (state = [], action) => {
 
 export const countriesReducer = (state = [], action) => {
   switch (action.type) {
-    case Actions.FETCH_COUNTRIES:
+    case Actions.GET_COUNTRIES:
       return action.payload;
     default:
       return state;
