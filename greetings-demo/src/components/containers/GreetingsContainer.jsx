@@ -12,13 +12,10 @@ import GreetingForm from '../components/greeting-form/GreetingForm';
 import Greeting from '../components/greeting/Greeting';
 
 export class GreetingsContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     if (this.props.countries.length === 0){
-      this.props.actions.fetchCountries();      
+      this.props.actions.getCountries();
     }
   }
 
