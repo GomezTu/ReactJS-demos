@@ -1,0 +1,6 @@
+.visitor {
+  border: none; }
+  .visitor.list-group-item {
+    padding: 5px 20px; }
+    .visitor.list-group-item:nth-child(odd) {
+      color: dimgray; }

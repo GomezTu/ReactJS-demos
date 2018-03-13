@@ -1,0 +1,11 @@
+.visitor {    
+    border: none;
+      
+  &.list-group-item {
+    padding: 5px 20px;
+
+    &:nth-child(odd) {
+      color: dimgray;
+    }
+  }
+}
