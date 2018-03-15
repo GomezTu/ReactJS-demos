@@ -14,13 +14,13 @@ function Visitor(props) {
       <ListGroupItem className="visitor" onClick={e => props.onVisitorClick(props.user)}>
         <Row>
           <Col xs="4">
-            {props.user.name}
+            <span id="visitor-name">{props.user.name}</span>
           </Col>
           <Col xs="4">
-            {props.user.country}
+            <span id="visitor-country">{props.user.country}</span>
           </Col>
           <Col xs="4">
-            {props.user.birthDate}
+            <span id="visitor-birthDate">{props.user.birthDate}</span>
           </Col>
         </Row>
       </ListGroupItem>

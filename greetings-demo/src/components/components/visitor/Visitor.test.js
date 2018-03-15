@@ -20,9 +20,9 @@ describe('Visitor Component Tests', () => {
   })
 
   it('should render visitor data', () => {
-    expect(wrapper.find('.visitor').childAt(0).text()).toBe('Maxi');
-    expect(wrapper.find('.visitor').childAt(2).text()).toBe('Argentina');
-    expect(wrapper.find('.visitor').childAt(3).text()).toBe('05-31-1991');    
+    expect(wrapper.find('#visitor-name').text()).toBe('Maxi');
+    expect(wrapper.find('#visitor-country').text()).toBe('Argentina');
+    expect(wrapper.find('#visitor-birthDate').text()).toBe('05-31-1991');
   })
 
   it('should raise event on visitor click', () => {
