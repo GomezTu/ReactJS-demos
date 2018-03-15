@@ -2,44 +2,39 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount, shallow } from 'enzyme';
 import moment from 'moment'
-
 import Greeting from './Greeting';
 
-function setup() {
-  const props = {
-    name: 'Guille',
-    country: 'Arg',
-    birthYear: '1990'
-  };
+describe('Greeting Component Tests', () => {
 
-  return shallow(<Greeting {...props} />);
-}
+  let user, wrapper;
 
-describe('rendering', () => {
+  beforeEach(() => {
+    user = { name: 'Maxi', country: 'Argentina', birthDate: '05-31-1991' };
+    wrapper = shallow(<Greeting {...user} />);
+  })
+
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    const user = { name: 'Guille', country: 'Arg', birthYear: '1990' };
     ReactDOM.render( <Greeting {...user} /> , div);
     ReactDOM.unmountComponentAtNode(div);
   });
 
-  it('renders name property', () => {
-    const wrapper = setup();
-    expect(wrapper.find('#name').text()).toEqual('Guille');
+  it('renders 3 spans', () => {
+    expect(wrapper.find('span')).toHaveLength(4);
   });
 
-  it('renders country property', () => {
-    const wrapper = setup();
-    expect(wrapper.find('#country').text()).toEqual('Arg');
+  it('renders name prop', () => {
+    expect(wrapper.find('#name').text()).toEqual('Maxi');
   });
 
-  it('renders and calculate users age', () => {
-    const wrapper = setup();
+  it('renders country prop', () => {
+    expect(wrapper.find('#country').text()).toEqual('Argentina');
+  });
+
+  it('renders and calculates current age', () => {
     const today = moment();
-    const bornYear = moment(`01-01-1990`, "MM-DD-YYYY");
-    const age = moment.duration(moment().diff(bornYear)).years();
-
-    expect(wrapper.find('#age').text()).toBe(`${age}`);
+    const currenteAge = moment().diff(`05-31-1991`, 'years');
+    expect(wrapper.find('#age').text()).toBe(`${currenteAge+1}`);
   });
 
 })

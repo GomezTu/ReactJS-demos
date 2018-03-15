@@ -1,10 +1,11 @@
 .visitor {    
     border: none;
+    cursor: pointer;
       
   &.list-group-item {
     padding: 5px 20px;
 
-    &:nth-child(even) {
+    &:nth-child(odd) {
       background-color: aliceblue;
     }
   }

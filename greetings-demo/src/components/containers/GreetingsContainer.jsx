@@ -6,12 +6,12 @@ import { Row, Col } from 'reactstrap';
 //App Imports
 import * as registrationActions from '../../store/actions/register-actions';
 import * as visitorsActions from '../../store/actions/visitor-actions';
-import { countriesFormmatedForDropdown } from '../selectors/selectors';
-import VisitorList from '../components/visitorList/VisitorList';
-import GreetingForm from '../components/greeting-form/GreetingForm';
+import { FormatedCountries } from '../helpers/helpers';
+import VisitorList from '../components/visitorList/Visitor-List';
+import GreetingForm from '../components/greeting-form/Greeting-Form';
 import Greeting from '../components/greeting/Greeting';
 
-import "./Greeting-Container.css";
+import "./Greetings-Container.css";
 
 export class GreetingsContainer extends React.Component {
 
@@ -31,7 +31,9 @@ export class GreetingsContainer extends React.Component {
             onSave={this.props.actions.registerVisitor}
           />
           <Col xs="12">
-            { Object.keys(this.props.user).length === 0 ? null : <Greeting name={this.props.user.name} birthDate={this.props.user.birthDate} country={this.props.user.country}
+            { Object.keys(this.props.user).length === 0 ?
+                null : 
+                <Greeting name={this.props.user.name} birthDate={this.props.user.birthDate} country={this.props.user.country}
              /> }
           </Col>
         </Col>
@@ -52,7 +54,7 @@ export class GreetingsContainer extends React.Component {
 export function mapStateToProps({ greetings }) {
   return {
     visitors: greetings.registrations,
-    countries: countriesFormmatedForDropdown(greetings.countries),
+    countries: FormatedCountries(greetings.countries),
     user: greetings.currentVisitor,
   };
 }
