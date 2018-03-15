@@ -11,10 +11,8 @@ Visitor.propTypes = {
 
 function Visitor(props) {
   return (
-    <ListGroupItem
-      className="visitor"
-      onClick={e => props.onVisitorClick(props.user)}>
-      {props.user.name} - {props.user.country} - {props.user.birthYear}
+    <ListGroupItem className="visitor" onClick={e => props.onVisitorClick(props.user)}>
+      {props.user.name} - {props.user.country} - {props.user.birthDate}
     </ListGroupItem>
   )
 }

@@ -19,6 +19,10 @@ class GreetingForm extends React.Component {
   }
 
   handleChange = (e) => {
+    if(e.target.name === "country" && e.target.value === "Select one..."){
+      return;
+    }
+
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -31,7 +35,7 @@ class GreetingForm extends React.Component {
     this.setState({
       name: '', 
       country: '',
-      birthDate: '' });
+      birthDate: null });
 
     this.props.onSave(newVisitor);
   }
@@ -52,7 +56,8 @@ class GreetingForm extends React.Component {
     return (
       <Form>
         <FormGroup>
-          <Label for="name">Name</Label>
+          <Label for="name"
+            className="float-left">Name</Label>
           <Input
             value={this.state.name}
             onChange={e => this.handleChange(e)}
@@ -61,31 +66,35 @@ class GreetingForm extends React.Component {
             id="name" />
         </FormGroup>
         <FormGroup>
-          <Label for="country">Pais</Label>
+          <Label for="country"
+            className="float-left">Country</Label>
           <Input
             value={this.state.country}
             onChange={e => this.handleChange(e)}
             type="select"
             name="country"
             id="country">
-            <option>Select one...</option>
-            {this.renderOptions(countries)}
+              <option>Select one...</option>
+              {this.renderOptions(countries)}
           </Input>
         </FormGroup>
         <FormGroup>
-          <Label for="birthDate">Año de nacimiento</Label>
+          <Label for="birthDate"
+            className="float-left">Birthdate</Label>
           <Input
-            value={this.state.birthYear}
+            value={this.state.birthDate}
             onChange={e => this.handleChange(e)}
-            type="number"
+            type="date"
             name="birthDate"
             id="birthDate" />
         </FormGroup>
-        <FormGroup>
+        <FormGroup className="clearfix">
           <Button
             onClick={e => this.handleSubmit(e)}
-            color="primary">
-            Say Hi!
+            color="primary"
+            className="float-right"
+            disabled={!this.state.name || !this.state.country || !this.state.birthDate}>
+            Save
         </Button>
         </FormGroup>
       </Form>

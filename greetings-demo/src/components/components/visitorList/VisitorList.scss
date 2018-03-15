@@ -1,10 +1,13 @@
-.visitor-list{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    background-color: white;
-    text-align: left;
-    min-height: 60vh;
+.visitor-container{
+  padding-right: 0px;
 
-    &__title {
-      padding: 10px 20px 0
-    }
+  .visitor-list {
+      background-color: white;
+      text-align: center;
+      min-height: 65vh;
+  
+      .visitor-list-title {
+        padding: 10px 20px 0
+      }
+  }
 }

@@ -11,26 +11,14 @@ import VisitorList from '../components/visitorList/VisitorList';
 import GreetingForm from '../components/greeting-form/GreetingForm';
 import Greeting from '../components/greeting/Greeting';
 
+import "./Greeting-Container.css";
+
 export class GreetingsContainer extends React.Component {
 
   componentDidMount() {
     if (this.props.countries.length === 0){
       this.props.actions.getCountries();
     }
-  }
-
-  handleVisitorClicked = (selectedVisitor) => {
-    //To-DO
-  }
-
-  renderGreeting(user) {
-    if (Object.keys(user).length === 0) return;
-
-    return (
-      <Greeting name={user.name}
-                birthDate={user.birthDate}
-                country={user.country} />
-    )
   }
 
   render() {
@@ -43,14 +31,18 @@ export class GreetingsContainer extends React.Component {
             onSave={this.props.actions.registerVisitor}
           />
           <Col xs="12">
-            { this.renderGreeting(this.props.user) }
+            { Object.keys(this.props.user).length === 0 ? null : <Greeting name={this.props.user.name} birthDate={this.props.user.birthDate} country={this.props.user.country}
+             /> }
           </Col>
         </Col>
         <Col xs="6">
           <VisitorList
             visitors={this.props.visitors}
-            onVisitorClick={this.handleVisitorClicked}
+            onVisitorClick={this.props.actions.selectVisitor}
           />
+          <div className="author-data">
+            Author: <span className="author-data__name">Maximiliano Gomez</span>
+          </div>
         </Col>
       </Row>
     );

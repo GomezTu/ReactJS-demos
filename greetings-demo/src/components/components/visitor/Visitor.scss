@@ -4,8 +4,8 @@
   &.list-group-item {
     padding: 5px 20px;
 
-    &:nth-child(odd) {
-      color: dimgray;
+    &:nth-child(even) {
+      background-color: aliceblue;
     }
   }
 }

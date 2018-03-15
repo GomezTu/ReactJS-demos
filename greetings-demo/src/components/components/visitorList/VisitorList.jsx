@@ -13,7 +13,7 @@ VisitorList.propTypes = {
 function renderVisitor(props) {
   return (
     <ListGroup className="visitor-list">
-      <Label className="visitor-list__title">Previous Visitors</Label>
+      <Label className="visitor-list-title">Previous Visitors</Label>
       {props.visitors.map((visitor, i) =>
         <Visitor
           key={i}
@@ -27,8 +27,23 @@ function renderVisitor(props) {
 
 function VisitorList(props) {
   return (
-    <Container>
-      {props.visitors.length ? renderVisitor(props) : "No Visitors so far..."}
+    <Container className="visitor-container">
+      {
+        props.visitors.length ?
+          <ListGroup className="visitor-list">
+            <Label className="visitor-list-title">Previous Visitors</Label>
+              {props.visitors.map((visitor, i) =>
+                <Visitor
+                  key={i}
+                  user={visitor}
+                  onVisitorClick={props.onVisitorClick}
+                />
+              )}
+          </ListGroup> :
+          <ListGroup className="visitor-list">
+            <Label className="visitor-list-title">No visitors so far...</Label>
+          </ListGroup>
+      }
     </Container>
   )
 }
