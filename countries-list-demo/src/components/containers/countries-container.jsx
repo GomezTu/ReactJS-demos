@@ -5,13 +5,13 @@ import { bindActionCreators } from 'redux';
 import { Row, Col } from 'reactstrap';
 //Actions
 import * as countriesActions from '../../store/actions/countries-action-creators';
+import { GetVisibleCountries } from '../../store/actions/filter-action-creators';
 import * as filterActions from '../../store/actions/filter-action-creators';
 //Components (Filter + Countries List + Country Detail)
 import CountryList from '../components/countries-list/countries-list'
 import CountryDetail from '../components/country-detail/country-detail'
-//CSS
+import Filter from '../components/filter/filter'
 //import './countries-container.css';
-
 
 export class CountriesContainer extends React.Component{
 
@@ -25,7 +25,7 @@ export class CountriesContainer extends React.Component{
         return(
             <Col xs="12">
                 <Row>
-                    Filter Row HTML
+                    <Filter onChange={this.props.actions.FilterChangeAction}/>
                 </Row>
                 <Row>
                     <CountryList 
@@ -36,6 +36,7 @@ export class CountriesContainer extends React.Component{
                 <Row>
                     <CountryDetail
                         country={this.props.selectedCountry}
+                        onSave={this.props.actions.UpdateCountry}
                     />
                 </Row>
             </Col>
@@ -45,7 +46,7 @@ export class CountriesContainer extends React.Component{
 
 export function mapStateToProps({ greetings }) {
     return {
-        countries: greetings.countries,
+        countries: GetVisibleCountries(greetings.countries, greetings.filter.name, greetings.filter.code, greetings.filter.region),
         selectedCountry: greetings.selectedCountry,
         filter: greetings.filter
     };

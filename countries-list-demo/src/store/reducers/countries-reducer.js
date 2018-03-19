@@ -6,6 +6,14 @@ export const CountriesReducer = (state = [], action) => {
             return [...state, action];
         case Actions.GET_COUNTRIES:
             return action.payload;
+        case Actions.UPDATE_COUNTRY:
+            const updatedItems = state.map(country => {
+                if (country.alpha3Code == action.payload.alpha3code) {
+                    return { ...country, ...action.payload }
+                }
+                return country;
+            })
+            return updatedItems;
         default:
             return state;
     }
