@@ -26,6 +26,12 @@ function SelectCountryAction(country) {
         payload: country
     }
 }
+function UpdateCountryAction(country){
+    return {
+        type: Actions.UPDATE_COUNTRY,
+        payload: country
+    }
+}
 
 
 //EXPORT FUNCTIONS
@@ -43,6 +49,12 @@ export function GetCountries() {
 export function SelectCountry(country) {
     return (dispatch) => {
         dispatch(SelectCountryAction(country));
+    }
+}
+
+export function UpdateCountry(country) {
+    return (dispatch) => {
+        dispatch(UpdateCountryAction(country));
     }
 }
 

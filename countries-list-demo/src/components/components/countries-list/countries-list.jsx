@@ -4,6 +4,7 @@ import { Container, ListGroup, Label } from 'reactstrap';
 import { Row, Col } from 'reactstrap';
 
 import CountryItem from '../country-item/country-item'
+import './countries-list.css'
 
 CountryList.propTypes = {
     countries: PropTypes.array.isRequired,

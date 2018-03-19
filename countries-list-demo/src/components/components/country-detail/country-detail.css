@@ -1,0 +1,15 @@
+.country-detail__container {
+  margin-top: 30px; }
+
+.country-detail__flag-img {
+  max-height: 150px;
+  top: 5%;
+  max-width: 350px; }
+
+.country-detail__button-row {
+  padding-top: 20px;
+  padding-bottom: 30px; }
+
+.country-detail__button-save {
+  margin-left: 15px;
+  float: right; }
