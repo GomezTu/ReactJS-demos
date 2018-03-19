@@ -3,4 +3,5 @@
   background-color: lightgray;
   height: 100vh; }
   .App .App-header {
-    margin-bottom: 25px; }
+    padding-bottom: 35px;
+    padding-top: 35px; }

@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-
 import { registrationReducer, countriesReducer } from '../reducers/register-reducer';
 import { visitorReducer } from '../reducers/visitor-reducer';
 

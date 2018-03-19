@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-
 import { reducer as greetings } from './reducers/reducer';
 
 const rootReducer = combineReducers({
