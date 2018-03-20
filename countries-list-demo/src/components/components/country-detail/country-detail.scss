@@ -2,6 +2,11 @@
 
     &__container {
         margin-top: 30px;
+        border: 1px solid lightgray;
+    }
+
+    &__row {
+        padding-top: 15px;
     }
 
     &__flag-img {
@@ -12,7 +17,7 @@
 
     &__button-row {
         padding-top: 20px;
-        padding-bottom: 30px;
+        padding-bottom: 15px;
     }
 
     &__button-save {

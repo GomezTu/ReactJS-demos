@@ -6,7 +6,8 @@ import './filter.css'
 class Filter extends React.Component {
     
     static propTypes = {
-        onChange: PropTypes.func.isRequired
+        onChange: PropTypes.func.isRequired,
+        onClear: PropTypes.func.isRequired
     }
     
     constructor(props){
@@ -23,6 +24,13 @@ class Filter extends React.Component {
             [e.target.name]: e.target.value
         }, () => {
             this.props.onChange(this.state)
+
+            if(this.state.name !== '' ||
+                this.state.code !== '' ||
+                this.state.region !== '') {
+                    this.props.onClear({});
+            }
+
         });
     }
 
