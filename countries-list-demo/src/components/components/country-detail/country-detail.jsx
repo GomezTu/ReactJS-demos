@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, FormGroup, Container, Label, Input, Button } from 'reactstrap';
+import { Row, Col, FormGroup, Container, Label, Input, Button, Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
 
 import './country-detail.css'
 
@@ -8,7 +8,10 @@ class CountryDetail extends React.Component {
 
     static propTypes = {
         country: PropTypes.object.isRequired,
-        onSave: PropTypes.func.isRequired
+        onSave: PropTypes.func.isRequired,
+        onCreate: PropTypes.func.isRequired,
+        onClose: PropTypes.func.isRequired,
+        flags: PropTypes.array.isRequired
     }
     
     constructor(props){
@@ -19,9 +22,30 @@ class CountryDetail extends React.Component {
             code: '',
             region: '',
             subregion: '',
-            enableEdit: false
+            enableEdit: false,
+            dropdownOpen: false
         };
     }
+
+    renderOptions = (flags) => {
+        return (
+            flags.map(f =>
+                <DropdownItem 
+                    onClick={(e) => this.toggle(e)}
+                    key={f.name}
+                    value={f.flag}>
+                        {f.name}
+                </DropdownItem>
+            )
+        )
+    }
+
+    toggle = (e) => {
+        this.setState({
+          dropdownOpen: !this.state.dropdownOpen,
+          flag: e.target ? e.target.value : ''
+        });
+      }
 
     componentWillReceiveProps(nextProps){
         if (this.props != nextProps) {
@@ -29,9 +53,10 @@ class CountryDetail extends React.Component {
             this.setState({
                 flag: nextProps.country.flag,
                 name: nextProps.country.name,
-                code: nextProps.country.alpha3Code,
+                code: nextProps.country.alpha3Code ? nextProps.country.alpha3Code : '',
                 region: nextProps.country.region,
-                subregion: nextProps.country.subregion
+                subregion: nextProps.country.subregion,
+                enableEdit: nextProps.country.name && nextProps.country.name.length > 0 ? false : true
             })
         }
     }
@@ -65,11 +90,20 @@ class CountryDetail extends React.Component {
             subregion: this.state.subregion,
             flag: this.state.flag
         };
-        this.props.onSave(updateCountry);
+        if (this.oldCountry.name === '') {
+            this.props.onCreate(updateCountry);
+        } else {
+            this.props.onSave(updateCountry);
+        }
+    }
+
+    cancelCreation = () => {
+        this.props.onClose({});
     }
 
     render() {
-        const hasCountry = this.props.country.name ? true : false;
+        const hasCountry = this.props.country.name === undefined ? false : true;
+        const newcountry = this.props.country.name === '' ? true : false;
 
         return(
             <Container className={hasCountry ? "country-detail__container" : ""}>
@@ -114,16 +148,39 @@ class CountryDetail extends React.Component {
                                             id="region"
                                             disabled={!this.state.enableEdit}/>
                                     </FormGroup>
-                                    <FormGroup className="col-6">
-                                        <Label className="float-left" for="subregion">Sub Region</Label>
-                                        <Input 
-                                            value={this.state.subregion}
-                                            onChange={(e) => this.handleChange(e)}
-                                            type="text" 
-                                            name="subregion" 
-                                            id="subregion"
-                                            disabled={!this.state.enableEdit}/>
-                                    </FormGroup>
+                                    {
+                                        newcountry ?
+                                            <FormGroup className="col-6">
+                                                <Dropdown className="btn btn-default container"
+                                                    isOpen={this.state.dropdownOpen}
+                                                    toggle={this.toggle}>
+                                                    <DropdownToggle
+                                                        tag="span"
+                                                        onClick={this.toggle}
+                                                        data-toggle="dropdown"
+                                                        aria-expanded={this.state.dropdownOpen}>
+                                                            Flags
+                                                    </DropdownToggle>
+                                                    <DropdownMenu>
+                                                        <DropdownItem header>Select one...</DropdownItem>
+                                                        {
+                                                            this.renderOptions(this.props.flags)
+                                                        }
+                                                    </DropdownMenu>
+                                                </Dropdown>
+                                            </FormGroup>
+                                        :
+                                            <FormGroup className="col-6">
+                                                <Label className="float-left" for="subregion">Sub Region</Label>
+                                                <Input
+                                                    value={this.state.subregion}
+                                                    onChange={(e) => this.handleChange(e)}
+                                                    type="text" 
+                                                    name="subregion" 
+                                                    id="subregion"
+                                                    disabled={!this.state.enableEdit}/>
+                                            </FormGroup>
+                                    }
                                 </Row>
                             </Col>
                         </Row>
@@ -136,13 +193,24 @@ class CountryDetail extends React.Component {
                                     disabled={!this.state.enableEdit}>
                                         Save
                                 </Button>
-                                <Button
-                                    className="btn-primary float-right"
-                                    name="enableEdit"
-                                    color="primary"
-                                    onClick={(e) => this.handleChange(e)}>
-                                        { this.state.enableEdit ? 'Cancel' : 'Edit' }
-                                </Button>
+                                {
+                                    newcountry ? 
+                                        <Button
+                                        className="btn-primary float-right"
+                                        name="enableEdit"
+                                        color="primary"
+                                        onClick={() => this.cancelCreation()}>
+                                            Close
+                                        </Button>
+                                    :
+                                        <Button
+                                        className="btn-primary float-right"
+                                        name="enableEdit"
+                                        color="primary"
+                                        onClick={(e) => this.handleChange(e)}>
+                                            { this.state.enableEdit ? 'Cancel' : 'Edit' }
+                                        </Button>
+                                }
                             </Col>
                         </Row>
                     </Col>

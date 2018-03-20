@@ -4,6 +4,9 @@
 
 .country-detail__row {
   padding-top: 15px; }
+  .country-detail__row .btn-default {
+    border: 1px solid lightgray;
+    top: 45%; }
 
 .country-detail__flag-img {
   max-height: 150px;

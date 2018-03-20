@@ -3,3 +3,9 @@
   padding-right: 0px;
   margin-top: 40px;
   border: 1px solid lightgray; }
+
+.add-country-button {
+  position: relative;
+  top: 5px;
+  left: 30px;
+  min-width: 140px; }

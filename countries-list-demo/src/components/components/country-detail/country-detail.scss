@@ -7,6 +7,11 @@
 
     &__row {
         padding-top: 15px;
+
+        .btn-default {
+            border: 1px solid lightgray;
+            top: 45%;
+        }
     }
 
     &__flag-img {
@@ -24,5 +29,6 @@
         margin-left: 15px;
         float: right;
     }
+
 
 }

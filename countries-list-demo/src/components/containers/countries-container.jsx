@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Row, Col } from 'reactstrap';
 //Actions
 import * as countriesActions from '../../store/actions/countries-action-creators';
-import { GetVisibleCountries } from '../../store/actions/filter-action-creators';
+import { GetVisibleCountries, GetFlagsFromCountries } from '../../helpers/helper-functions';
 import * as filterActions from '../../store/actions/filter-action-creators';
 //Components (Filter + Countries List + Country Detail)
 import CountryList from '../components/countries-list/countries-list'
@@ -24,20 +24,27 @@ export class CountriesContainer extends React.Component{
     render(){
         return(
             <Col xs="12">
-                <Row className="filter-caontainer">
-                    <Filter onChange={this.props.actions.FilterChangeAction}
-                            onClear={this.props.actions.SelectCountry}/>
+                <Row className="filter-container">
+                    <Filter 
+                        onChange={this.props.actions.FilterChangeAction}
+                        onClear={this.props.actions.SelectCountry}
+                    />
                 </Row>
                 <Row>
-                    <CountryList 
-                        countries={this.props.countries}
-                        onCountryClick={this.props.actions.SelectCountry}
-                    />
+                    <Col>
+                        <CountryList 
+                            countries={this.props.countries}
+                            onCountryClick={this.props.actions.SelectCountry}
+                        />
+                    </Col>
                 </Row>
                 <Row>
                     <CountryDetail
                         country={this.props.selectedCountry}
                         onSave={this.props.actions.UpdateCountry}
+                        onCreate={this.props.actions.SaveCountry}
+                        onClose={this.props.actions.SelectCountry}
+                        flags={this.props.flags}
                     />
                 </Row>
             </Col>
@@ -49,7 +56,8 @@ export function mapStateToProps({ greetings }) {
     return {
         countries: GetVisibleCountries(greetings.countries, greetings.filter.name, greetings.filter.code, greetings.filter.region),
         selectedCountry: greetings.selectedCountry,
-        filter: greetings.filter
+        filter: greetings.filter,
+        flags: GetFlagsFromCountries(greetings.countries)
     };
 }
 

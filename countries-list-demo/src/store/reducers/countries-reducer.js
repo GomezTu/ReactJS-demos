@@ -3,7 +3,7 @@ import { Actions } from '../actions/countries-actions'
 export const CountriesReducer = (state = [], action) => {
     switch(action.type){
         case Actions.COUNTRY_CREATION_SAVE:
-            return [...state, action];
+            return [...state, action.payload];
         case Actions.GET_COUNTRIES:
             return action.payload;
         case Actions.UPDATE_COUNTRY:

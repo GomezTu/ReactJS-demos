@@ -43,7 +43,6 @@ export function GetCountries() {
             promise: fetch("https://restcountries.eu/rest/v2/all")
         })
     }
-
 }
 
 export function SelectCountry(country) {
@@ -70,6 +69,7 @@ export function SaveCountry(country){
         return api.submitCountry(country)
         .then(response => {
             dispatch(CountryCreationSaveSuccess(response));
+            dispatch(SelectCountryAction({}));
         })
         .catch(err => {
             dispatch(CountryCreationSaveError(err));
