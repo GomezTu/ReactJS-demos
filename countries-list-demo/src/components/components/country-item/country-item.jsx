@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ListGroupItem, Row, Col } from 'reactstrap';
+import './country-item.css'
 
 CountryItem.propTypes = {
     country: PropTypes.object.isRequired,
