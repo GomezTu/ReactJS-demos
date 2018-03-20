@@ -11,7 +11,7 @@ import * as filterActions from '../../store/actions/filter-action-creators';
 import CountryList from '../components/countries-list/countries-list'
 import CountryDetail from '../components/country-detail/country-detail'
 import Filter from '../components/filter/filter'
-//import './countries-container.css';
+import './countries-container.css';
 
 export class CountriesContainer extends React.Component{
 
@@ -24,8 +24,9 @@ export class CountriesContainer extends React.Component{
     render(){
         return(
             <Col xs="12">
-                <Row>
-                    <Filter onChange={this.props.actions.FilterChangeAction}/>
+                <Row className="filter-caontainer">
+                    <Filter onChange={this.props.actions.FilterChangeAction}
+                            onClear={this.props.actions.SelectCountry}/>
                 </Row>
                 <Row>
                     <CountryList 

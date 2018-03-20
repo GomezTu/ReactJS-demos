@@ -72,17 +72,17 @@ class CountryDetail extends React.Component {
         const hasCountry = this.props.country.name ? true : false;
 
         return(
-            <Container className="country-detail__container">
+            <Container className={hasCountry ? "country-detail__container" : ""}>
                 {
                     hasCountry ?
                     <Col xs="12">
-                        <Row>
+                        <Row className="country-detail__row">
                             <Col xs="6">
                                 <img className="col-12 country-detail__flag-img" src={this.state.flag} />
                             </Col>
                             <Col xs="6">
                                 <Row>
-                                    <FormGroup className="col-4">
+                                    <FormGroup className="col-6">
                                         <Label className="float-left" for="name">Name</Label>
                                         <Input 
                                             value={this.state.name}
@@ -92,7 +92,7 @@ class CountryDetail extends React.Component {
                                             id="name"
                                             disabled={!this.state.enableEdit}/>
                                     </FormGroup>
-                                    <FormGroup className="col-4">
+                                    <FormGroup className="col-6">
                                         <Label className="float-left" for="code">Code</Label>
                                         <Input 
                                             value={this.state.code}
@@ -104,7 +104,7 @@ class CountryDetail extends React.Component {
                                     </FormGroup>
                                 </Row>
                                 <Row>
-                                    <FormGroup className="col-4">
+                                    <FormGroup className="col-6">
                                         <Label className="float-left" for="region">Region</Label>
                                         <Input 
                                             value={this.state.region}
@@ -114,7 +114,7 @@ class CountryDetail extends React.Component {
                                             id="region"
                                             disabled={!this.state.enableEdit}/>
                                     </FormGroup>
-                                    <FormGroup className="col-4">
+                                    <FormGroup className="col-6">
                                         <Label className="float-left" for="subregion">Sub Region</Label>
                                         <Input 
                                             value={this.state.subregion}
