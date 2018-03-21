@@ -1,0 +1,19 @@
+.pagination {
+    padding-top: 20px;
+
+    li {
+        padding-left: 2px;
+        padding-right: 2px;
+        cursor: pointer;
+    }
+
+    .disabled {
+        cursor: not-allowed !important;
+        color: lightgray;
+    }
+
+    .active {
+        background-color: lightblue;
+        border-radius: 210px;
+    }
+}

@@ -1,7 +1,6 @@
 .country-detail{
 
     &__container {
-        margin-top: 30px;
         border: 1px solid lightgray;
     }
 
@@ -30,5 +29,9 @@
         float: right;
     }
 
-
+    &__close {
+        position: relative;
+        right: -455px;
+        top: 5px;
+    }
 }

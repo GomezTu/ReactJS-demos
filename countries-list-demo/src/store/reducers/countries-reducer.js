@@ -8,7 +8,7 @@ export const CountriesReducer = (state = [], action) => {
             return action.payload;
         case Actions.UPDATE_COUNTRY:
             const updatedItems = state.map(country => {
-                if (country.alpha3Code == action.payload.alpha3code) {
+                if (country.alpha3Code === action.payload.alpha3code) {
                     return { ...country, ...action.payload }
                 }
                 return country;

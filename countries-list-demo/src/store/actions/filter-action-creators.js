@@ -1,5 +1,4 @@
 import { Actions } from './filter-actions'
-import _ from 'lodash'
 
 function FilterChange(filter) {
     return {

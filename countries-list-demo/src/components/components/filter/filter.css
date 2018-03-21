@@ -2,4 +2,5 @@
   border: 1px solid lightgray; }
 
 .filter__formgroup {
-  padding-left: 15px; }
+  padding-left: 15px;
+  padding-top: 5px; }

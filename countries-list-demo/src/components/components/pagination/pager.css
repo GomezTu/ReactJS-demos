@@ -1,0 +1,12 @@
+.pagination {
+  padding-top: 20px; }
+  .pagination li {
+    padding-left: 2px;
+    padding-right: 2px;
+    cursor: pointer; }
+  .pagination .disabled {
+    cursor: not-allowed !important;
+    color: lightgray; }
+  .pagination .active {
+    background-color: lightblue;
+    border-radius: 210px; }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, FormGroup, Container, Label, Input, Button, Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
 
@@ -48,7 +48,7 @@ class CountryDetail extends React.Component {
       }
 
     componentWillReceiveProps(nextProps){
-        if (this.props != nextProps) {
+        if (this.props !== nextProps) {
             this.oldCountry = nextProps.country;
             this.setState({
                 flag: nextProps.country.flag,
@@ -110,6 +110,7 @@ class CountryDetail extends React.Component {
                 {
                     hasCountry ?
                     <Col xs="12">
+                        <Button className="country-detail__close" onClick={() => this.cancelCreation()}>X</Button>
                         <Row className="country-detail__row">
                             <Col xs="6">
                                 <img className="col-12 country-detail__flag-img" src={this.state.flag} />

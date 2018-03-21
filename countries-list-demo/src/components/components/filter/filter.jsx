@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, FormGroup, Container, Label, Input, Button } from 'reactstrap';
+import { Row, FormGroup, Container, Label, Input } from 'reactstrap';
 import './filter.css'
 
 class Filter extends React.Component {

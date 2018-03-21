@@ -11,9 +11,23 @@ import * as filterActions from '../../store/actions/filter-action-creators';
 import CountryList from '../components/countries-list/countries-list'
 import CountryDetail from '../components/country-detail/country-detail'
 import Filter from '../components/filter/filter'
+import Pagination from '../components/pagination/pager'
 import './countries-container.css';
 
 export class CountriesContainer extends React.Component{
+
+    constructor(){
+        super();
+        this.state = {
+            countries: []
+        }
+    }
+
+    onChangePage = (countries) => {
+        this.setState({
+            countries
+        });
+    }
 
     componentDidMount(){
         if ((this.props.countries && this.props.countries.length === 0) || !this.props.countries){
@@ -33,11 +47,15 @@ export class CountriesContainer extends React.Component{
                 <Row>
                     <Col>
                         <CountryList 
-                            countries={this.props.countries}
+                            countries={this.state.countries}
                             onCountryClick={this.props.actions.SelectCountry}
                         />
                     </Col>
                 </Row>
+                <Pagination 
+                            items={this.props.countries}
+                            onChangePage={this.onChangePage}
+                            itemsPerPage={7} />
                 <Row>
                     <CountryDetail
                         country={this.props.selectedCountry}

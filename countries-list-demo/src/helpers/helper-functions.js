@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 export function GetVisibleCountries(countries, name, code, region){
     if (countries.length > 0 && (name !== undefined && code !== undefined && region !== undefined)) {
-        let filteredcountries = countries.slice(10, 20);
+        let filteredcountries = countries;
 
         if (name) {
             filteredcountries = _.filter(filteredcountries, (country) => {
@@ -21,12 +21,12 @@ export function GetVisibleCountries(countries, name, code, region){
         }
         return filteredcountries;
     }
-    return countries.slice(10, 20);
+    return countries;
 }
 
 export function GetFlagsFromCountries(countries){
     let flags = [];
-    countries.slice(30, 40).map(country => {
+    countries.map(country => {
         flags.push({ name: country.name, flag: country.flag });
     });
     return flags;

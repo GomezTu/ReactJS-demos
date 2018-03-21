@@ -1,5 +1,4 @@
 .country-detail__container {
-  margin-top: 30px;
   border: 1px solid lightgray; }
 
 .country-detail__row {
@@ -20,3 +19,8 @@
 .country-detail__button-save {
   margin-left: 15px;
   float: right; }
+
+.country-detail__close {
+  position: relative;
+  right: -455px;
+  top: 5px; }
